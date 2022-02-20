@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::controller(\App\Http\Controllers\UserController::class)->group(function () {
+    Route::get('/users/send_notification/{id}', 'sendNotification');
+});
