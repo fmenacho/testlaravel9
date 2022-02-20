@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -41,4 +42,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getById(int $id){
+        $users = collect();
+
+        $users->push(
+            new User([
+                'id' => 1,
+                'email' => 'admin@example.org',
+            ]),
+            new User([
+                'id' => 2,
+                'email' => 'admin2@example.org',
+            ]),
+            new User([
+                'id' => 3,
+                'email' => 'user@example.org',
+            ]),
+            new User([
+                'id' => 4,
+                'email' => 'user2@example.org',
+            ]),
+        );
+
+
+        return $users->firstWhere('id', $id);
+    }
 }
